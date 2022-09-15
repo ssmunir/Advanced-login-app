@@ -72,7 +72,7 @@ if username in allowedUsers:
                     new_audio = base + '.mp3'
                     os.rename(audio, new_audio)
                     print(yt.title + "has been downloaded :)")
-                except NameError as e:
+                except (NameError, RuntimeError) as e:
                     print("Are you in Africa, cause this connections isn't just it")
                     pass
             elif displayOptions == 2:
@@ -81,7 +81,7 @@ if username in allowedUsers:
                     video_hd.download(path_full)
                     print(yt.title + "has been downloaded :)")
                 except (NameError, RuntimeError):
-                    print("Are you in Africa, cause this connections isn't just it")
+                    print("You're having connection issues")
                     pass
 
         elif selectedOptions == 2:
@@ -100,14 +100,14 @@ if username in allowedUsers:
                 pass
 
             if choice == 1:
-                source = input("Enter wav file path like xxx/xxx/filename.wav or file name if file in directory \n")
+                source = input("Enter wav file path or file name if file in directory \n")
                 destination = input("Enter destination file name \n")
                 sound = AudioSegment.from_wav(source)
                 sound.export(destination, format="mp3")
                 print("converted successfully")
             elif choice == 2:
-                source = input("Enter mp3 file path. Form == xxx/xxx/filename.mp3 \n")
-                destination = input("Enter file destination path. Form = xxx/xxx/filename.wav \n")
+                source = input("Enter mp3 file path or file name if file in directory \n")
+                destination = input("Enter file destination name \n")
                 sound = AudioSegment.from_mp3(source)
                 sound.export(destination, format="wav")
                 print("converted successfully")
@@ -189,7 +189,7 @@ if username in allowedUsers:
             web_flow = str(input("Enter the tag and class that contains text to scrape \n"))
             full_link = str(input("Enter full link to webpage \n"))
             print("Save text to file in directory ?")
-            save = int(input("1. Yes \n2. No \n"))
+            save = int(input("1. Yes\n2. No \n"))
             if save == 1:
                 try:
                     website = Website(web_name, web_link, t_tag, web_flow)
@@ -217,4 +217,5 @@ if username in allowedUsers:
     else:
         print("Password incorrect, please try again")
 else:
-    print("Name not found, please try again")
+    print("Name not found")
+    print("Kindly change allowed name and password from script")
